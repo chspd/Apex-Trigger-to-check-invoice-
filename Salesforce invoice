@@ -1,0 +1,13 @@
+  //Writing trigger named InvoiceClosed on Invoice Number object .........this will be fired based on the criterias mentioned in the comments
+
+trigger Invoiceclosed on Invoice_Number__c (after insert,before update) {
+    
+    for(Invoice_Number__c newcmp:Trigger.new)
+{                if(newcmp.Invoice_Status__c=='Closed'){     // check the invoice (either creating  or updating a record) with Invoice Status as “Closed” next check other condition
+            if(newcmp.Invoice_Close_Date__c== null)         //make sure invoice close date should not be blank
+                  newcmp.addError('Date field cannot be empty'); 
+        }            
+            }  
+    
+        }
+    
